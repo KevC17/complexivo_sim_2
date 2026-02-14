@@ -1,0 +1,56 @@
+CREATE USER cinema_user WITH PASSWORD 'admin123';
+CREATE DATABASE cinema_db OWNER cinema_user;
+
+\c cinema_db
+
+ALTER SCHEMA public OWNER TO cinema_user;
+GRANT ALL ON SCHEMA public TO cinema_user;
+GRANT CREATE ON SCHEMA public TO cinema_user;
+
+ALTER DEFAULT PRIVILEGES FOR USER cinema_user IN SCHEMA public
+GRANT ALL ON TABLES TO cinema_user;
+
+ALTER DEFAULT PRIVILEGES FOR USER cinema_user IN SCHEMA public
+GRANT ALL ON SEQUENCES TO cinema_user;
+
+ALTER DEFAULT PRIVILEGES FOR USER cinema_user IN SCHEMA public
+GRANT ALL ON FUNCTIONS TO cinema_user;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Progra
+///////////////////////////////////////////////////////////////////////////////////////////////////
+mkdir cinema_api
+cd cinema_api
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+
+
+npm create vite@latest cinema-ui -- --template react-ts
+cd cinema-ui
+npm install
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+UBUNTU
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+cat << EOF > cine_comandos.txt
+# Sistema Cine - Backend
+GET /api/movies/
+GET /api/reservations/
+POST /api/reservations/
+DELETE /api/reservations/20/
+INFO: reservation created successfully
+INFO: reservations service running
+WARN: reservations timeout detected
+EOF
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Datos
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+db.createUser({
+  user: "mongo_backend_user",
+  pwd: "exa_2026_ute",
+  roles: [{ role: "readWrite", db: "cinema_db" }]
+});
